@@ -45,6 +45,25 @@ const dialog = {
             },
             {
               type: 'input',
+              name: 'proxyPort',
+              message: `Which port is the proxy server listening on?`,
+              default: '8080',
+              validate: function(input) {
+                var done = this.async();
+                if (input == null || input === '') {
+                  done('This Field cannot be blank.');
+                  return;
+                }
+                const regex = new RegExp('^\\d*$');
+                if (!input.match(regex)) {
+                  done('This is not a valid Port.');
+                }
+                // Pass the return value in the done callback
+                done(null, true);
+              }
+            },
+            {
+              type: 'input',
               name: 'network',
               message: `Which network should be proxied? (Leave blank to proxy all.)`,
               default: ''
@@ -88,6 +107,25 @@ const dialog = {
             },
             {
               type: 'input',
+              name: 'proxyPort',
+              message: `Which port is the proxy server listening on?`,
+              default: previousConfig.proxyPort,
+              validate: function(input) {
+                var done = this.async();
+                if (input == null || input === '') {
+                  done('This Field cannot be blank.');
+                  return;
+                }
+                const regex = new RegExp('^\\d*$');
+                if (!input.match(regex)) {
+                  done('This is not a valid Port.');
+                }
+                // Pass the return value in the done callback
+                done(null, true);
+              }
+            },
+            {
+              type: 'input',
               name: 'network',
               message: `Which network should be proxied? (Leave blank to proxy all.)`,
               default: previousConfig.network
@@ -110,6 +148,7 @@ const dialog = {
 function answersToConfigObject(answers) {
   return {
     proxyAddress: answers.proxyAddress,
+    proxyPort: answers.proxyPort,
     network: answers.network,
     containerName: answers.containerName
   };

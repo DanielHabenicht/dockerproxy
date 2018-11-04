@@ -17,7 +17,8 @@ Usage: dockerproxy [options] <command>
 
 Options:
   -v, --version               output the version number
-  -p, --proxy [address]       proxy server address
+  -a, --address [domain]      proxy server address
+  -p, --port [number]         proxy server port
   -n, --network <name>        docker network interface that should be proxied
   -w, --whitelistFile <path>  proxy server address
   --containerName <string>    proxy server Container Name
@@ -44,7 +45,7 @@ There are two ways of using this command line tool:
    - Use either `dockerproxy start` or `dockerproxy stop` for turning the proxy on and off.
 2. For starting right away or usage in scripts:
    ```bash
-   dockerproxy start --proxy company-proxy-address.com:8080
+   dockerproxy start --address company-proxy-address.com --port 8080
    ```
    > You can use `--network` to specify a docker interface that should get proxied. (by default all networks get proxied)
 

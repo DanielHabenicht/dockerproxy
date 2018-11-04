@@ -30,9 +30,13 @@ commander
       );
       process.exit(1);
     }
-    const config = helpers.readConfig();
+    var config = {};
+    try {
+      config = helpers.readConfig();
+    } catch (err) {}
     startProxy(
-      commander.proxy || config.proxyAddress,
+      commander.address || config.proxyAddress,
+      commander.port || config.proxyPort || 8080,
       commander.containerName || config.containerName || 'docker_proxy',
       commander.network || config.network || ''
     );
@@ -43,12 +47,16 @@ commander
   .command('stop')
   .description('stop proxying Docker-Containers')
   .action(function() {
-    if (!helpers.isConfigured()) {
-      error(
-        `ERROR: No configuration given.\nEither provide a container name via --containerName option or setup this command via:\n    $ dockerproxy setup`
-      );
-    }
-    const config = helpers.readConfig();
+    // if (!helpers.isConfigured()) {
+    //   error(
+    //     `ERROR: No configuration given.\nEither provide a container name via --containerName option or setup this command via:\n    $ dockerproxy setup`
+    //   );
+
+    // }
+    var config = {};
+    try {
+      config = helpers.readConfig();
+    } catch (err) {}
     stopProxy(commander.containerName || config.containerName || 'docker_proxy');
   });
 
@@ -88,19 +96,20 @@ commander
 
 // Arguments
 commander
-  .option('-p, --proxy [address]', 'proxy server address')
+  .option('-a, --address [domain]', 'proxy server address')
+  .option('-p, --port [number]', 'proxy server port')
   .option('-n, --network <name>', 'docker network interface that should be proxied')
   .option('-w, --whitelistFile <path>', 'proxy server address')
   .option('--containerName <string>', 'proxy server Container Name')
   .parse(process.argv);
 
-function startProxy(address, name, network) {
+function startProxy(address, port, name, network) {
   console.log(`Starting Proxy-Container, this might take a moment...`);
   var command = '';
   if (network === '') {
-    command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET -d ncarlier/redsocks ${address}`;
+    command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET -d ncarlier/redsocks ${address} ${port}`;
   } else {
-    command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET=${network} -d ncarlier/redsocks ${address}`;
+    command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET=${network} -d ncarlier/redsocks ${address} ${port}`;
   }
   console.log(command);
   cmd.get(command, function(err, data, stderr) {

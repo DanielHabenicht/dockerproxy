@@ -5,7 +5,7 @@ const settingsPath = getInstalledPathSync('docker-container-proxy') + '/settings
 
 helpers = {
   isConfigured: function() {
-    if (!fs.existsSync(settingsPath) && !commander.proxy) {
+    if (!fs.existsSync(settingsPath) && !commander.address && !commander.port) {
       return false;
     }
     return true;
