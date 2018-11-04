@@ -2,6 +2,16 @@
 
 A little command line tool based on [ncarlier/redsocks](https://github.com/ncarlier/dockerfiles/tree/master/redsocks) to proxy all running docker containers, without the need to configure anything inside of them.
 
+# Installation
+
+```bash
+npm i -g dockerproxy
+```
+
+> Run `dockerproxy setup` in order to never remember your proxy server address again..
+
+## Interface
+
 ```
 Usage: dockerproxy [options] <command>
 
@@ -24,6 +34,19 @@ Examples:
   $ dockerproxy start   # Turn on the Docker Proxy
   $ dockerproxy stop    # Turn off the Docker Proxy
 ```
+
+## Example
+
+There are two ways of using this command line tool:
+
+1. Recommended:
+   - Configure the cli interactively for easier use later on (just type `dockerproxy setup`)
+   - Use either `dockerproxy start` or `dockerproxy stop` for turning the proxy on and off.
+2. For starting right away or usage in scripts:
+   ```bash
+   dockerproxy start --proxy company-proxy-address.com:8080
+   ```
+   > You can use `--network` to specify a docker interface that should get proxied. (by default all networks get proxied)
 
 ## Debugging
 
