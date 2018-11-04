@@ -5,7 +5,7 @@ A little command line tool based on [ncarlier/redsocks](https://github.com/ncarl
 # Installation
 
 ```bash
-npm i -g dockerproxy
+npm i -g docker-container-proxy
 ```
 
 > Run `dockerproxy setup` in order to never remember your proxy server address again..

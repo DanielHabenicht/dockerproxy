@@ -1,3 +1,4 @@
+#! /usr/bin/env node
 var cmd = require('node-cmd');
 var commander = require('commander');
 const helpers = require('./helpers');
