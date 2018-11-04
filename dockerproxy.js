@@ -32,8 +32,8 @@ commander
     const config = helpers.readConfig();
     startProxy(
       commander.proxy || config.proxyAddress,
-      commander.containerName || config.containerName,
-      commander.network || config.network
+      commander.containerName || config.containerName || 'docker_proxy',
+      commander.network || config.network || ''
     );
   });
 
@@ -48,7 +48,7 @@ commander
       );
     }
     const config = helpers.readConfig();
-    stopProxy(commander.containerName || config.containerName);
+    stopProxy(commander.containerName || config.containerName || 'docker_proxy');
   });
 
 // Setup Command
