@@ -1,0 +1,30 @@
+{
+  "name": "dockerproxy",
+  "version": "0.0.0",
+  "description": "command line tool for proxying docker containers easily",
+  "main": "dockerproxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DanielHabenicht/dockerproxy.git"
+  },
+  "keywords": [
+    "docker",
+    "proxy",
+    "container"
+  ],
+  "author": "Daniel Habenicht",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/DanielHabenicht/dockerproxy/issues"
+  },
+  "homepage": "https://github.com/DanielHabenicht/dockerproxy#readme",
+  "dependencies": {
+    "chalk": "^2.4.1",
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.0",
+    "node-cmd": "^3.0.0"
+  }
+}
