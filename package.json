@@ -1,6 +1,6 @@
 {
   "name": "docker-container-proxy",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "command line tool for proxying docker containers easily",
   "main": "dockerproxy.js",
   "scripts": {
@@ -27,6 +27,7 @@
   "dependencies": {
     "chalk": "^2.4.1",
     "commander": "^2.19.0",
+    "get-installed-path": "^4.0.8",
     "inquirer": "^6.2.0",
     "node-cmd": "^3.0.0"
   }

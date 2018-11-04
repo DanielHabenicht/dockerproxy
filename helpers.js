@@ -1,6 +1,7 @@
 var fs = require('fs');
 var commander = require('commander');
-const settingsPath = './settings.json';
+const { getInstalledPathSync } = require('get-installed-path');
+const settingsPath = getInstalledPathSync('docker-container-proxy') + '/settings.json';
 
 helpers = {
   isConfigured: function() {
