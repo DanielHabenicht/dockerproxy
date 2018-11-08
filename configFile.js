@@ -2,9 +2,9 @@ var fs = require('fs');
 var commander = require('commander');
 const settingsPath = require('os').homedir() + '\\docker-container-proxy-settings.json';
 
-const helpers = {
+const configFile = {
   isConfigured: function () {
-    if (!fs.existsSync(settingsPath) && !commander.address && !commander.port) {
+    if (!fs.existsSync(settingsPath)) {
       return false;
     }
     return true;
@@ -20,4 +20,4 @@ const helpers = {
   }
 };
 
-module.exports = helpers;
+module.exports = configFile;

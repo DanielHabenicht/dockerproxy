@@ -1,7 +1,7 @@
 #! /usr/bin/env node
 var cmd = require('node-cmd');
 var commander = require('commander');
-const helpers = require('./helpers');
+const configFile = require('./configFile');
 const dialog = require('./dialog');
 const chalk = require('chalk');
 
@@ -24,7 +24,7 @@ commander
   .command('start')
   .description('start proxying Docker-Containers')
   .action(function () {
-    if (!helpers.isConfigured()) {
+    if (!configFile.isConfigured() && !commander.address && !commander.port) {
       error(
         `ERROR: No configuration given.\nEither provide proxy address via --proxy option or setup this command via:\n    $ dockerproxy setup`
       );
@@ -32,7 +32,7 @@ commander
     }
     var config = {};
     try {
-      config = helpers.readConfig();
+      config = configFile.readConfig();
     } catch (err) { }
     startProxy(
       commander.address || config.proxyAddress,
@@ -47,7 +47,7 @@ commander
   .command('stop')
   .description('stop proxying Docker-Containers')
   .action(function () {
-    // if (!helpers.isConfigured()) {
+    // if (!helpers.isConfigured() && !commander.address && !commander.port) {
     //   error(
     //     `ERROR: No configuration given.\nEither provide a container name via --containerName option or setup this command via:\n    $ dockerproxy setup`
     //   );
@@ -55,7 +55,7 @@ commander
     // }
     var config = {};
     try {
-      config = helpers.readConfig();
+      config = configFile.readConfig();
     } catch (err) { }
     stopProxy(commander.containerName || config.containerName || 'docker_proxy');
   });
@@ -65,17 +65,17 @@ commander
   .command('setup')
   .description('setup this command tool in order to use it without options')
   .action(function () {
-    if (helpers.isConfigured()) {
+    if (configFile.isConfigured()) {
       dialog.overwrite().then(function (overwrite) {
         if (overwrite) {
-          dialog.askForConfig(helpers.readConfig()).then(function (config) {
-            helpers.writeConfig(config);
+          dialog.askForConfig(configFile.readConfig()).then(function (config) {
+            configFile.writeConfig(config);
           });
         }
       });
     } else {
       dialog.askForConfig().then(function (config) {
-        helpers.writeConfig(config);
+        configFile.writeConfig(config);
       });
     }
   });
@@ -91,8 +91,8 @@ commander
   .command('config')
   .description('Print the config')
   .action(() => {
-    console.log(`File located at: ${helpers.getSettingsPath()}`)
-    console.log(helpers.readConfig());
+    console.log(`File located at: ${configFile.getSettingsPath()}`)
+    console.log(configFile.readConfig());
   });
 
 // Arguments
