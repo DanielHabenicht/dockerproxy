@@ -12,7 +12,7 @@ commander
   .name('dockerproxy')
   .version(require('./package.json').version, '-v, --version')
   .usage(`[options] <command>`)
-  .on('--help', function() {
+  .on('--help', function () {
     console.log('');
     console.log('Examples:');
     console.log('  $ dockerproxy start   # Turn on the Docker Proxy');
@@ -23,7 +23,7 @@ commander
 commander
   .command('start')
   .description('start proxying Docker-Containers')
-  .action(function() {
+  .action(function () {
     if (!helpers.isConfigured()) {
       error(
         `ERROR: No configuration given.\nEither provide proxy address via --proxy option or setup this command via:\n    $ dockerproxy setup`
@@ -33,7 +33,7 @@ commander
     var config = {};
     try {
       config = helpers.readConfig();
-    } catch (err) {}
+    } catch (err) { }
     startProxy(
       commander.address || config.proxyAddress,
       commander.port || config.proxyPort || 8080,
@@ -46,7 +46,7 @@ commander
 commander
   .command('stop')
   .description('stop proxying Docker-Containers')
-  .action(function() {
+  .action(function () {
     // if (!helpers.isConfigured()) {
     //   error(
     //     `ERROR: No configuration given.\nEither provide a container name via --containerName option or setup this command via:\n    $ dockerproxy setup`
@@ -56,7 +56,7 @@ commander
     var config = {};
     try {
       config = helpers.readConfig();
-    } catch (err) {}
+    } catch (err) { }
     stopProxy(commander.containerName || config.containerName || 'docker_proxy');
   });
 
@@ -64,17 +64,17 @@ commander
 commander
   .command('setup')
   .description('setup this command tool in order to use it without options')
-  .action(function() {
+  .action(function () {
     if (helpers.isConfigured()) {
-      dialog.overwrite().then(function(overwrite) {
+      dialog.overwrite().then(function (overwrite) {
         if (overwrite) {
-          dialog.askForConfig(helpers.readConfig()).then(function(config) {
+          dialog.askForConfig(helpers.readConfig()).then(function (config) {
             helpers.writeConfig(config);
           });
         }
       });
     } else {
-      dialog.askForConfig().then(function(config) {
+      dialog.askForConfig().then(function (config) {
         helpers.writeConfig(config);
       });
     }
@@ -91,6 +91,7 @@ commander
   .command('config')
   .description('Print the config')
   .action(() => {
+    console.log(`File located at: ${helpers.getSettingsPath()}`)
     console.log(helpers.readConfig());
   });
 
@@ -112,7 +113,7 @@ function startProxy(address, port, name, network) {
     command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET=${network} -d ncarlier/redsocks ${address} ${port}`;
   }
   console.log(command);
-  cmd.get(command, function(err, data, stderr) {
+  cmd.get(command, function (err, data, stderr) {
     if (err) {
       error(`Proxy could not be started:\n ${stderr}`);
       process.exit(1);
@@ -123,7 +124,7 @@ function startProxy(address, port, name, network) {
 }
 
 function stopProxy(name) {
-  cmd.get(`docker container stop ${name}`, function(err, data, stderr) {
+  cmd.get(`docker container stop ${name}`, function (err, data, stderr) {
     if (err) {
       error(`Proxy could not be stopped:\n ${stderr}`);
       process.exit(1);

@@ -1,20 +1,22 @@
 var fs = require('fs');
 var commander = require('commander');
-const { getInstalledPathSync } = require('get-installed-path');
-const settingsPath = getInstalledPathSync('docker-container-proxy') + '/settings.json';
+const settingsPath = require('os').homedir() + '\\docker-container-proxy-settings.json';
 
-helpers = {
-  isConfigured: function() {
+const helpers = {
+  isConfigured: function () {
     if (!fs.existsSync(settingsPath) && !commander.address && !commander.port) {
       return false;
     }
     return true;
   },
-  writeConfig: function(config) {
+  writeConfig: function (config) {
     fs.writeFileSync(settingsPath, JSON.stringify(config));
   },
-  readConfig: function() {
+  readConfig: function () {
     return JSON.parse(fs.readFileSync(settingsPath));
+  },
+  getSettingsPath() {
+    return settingsPath;
   }
 };
 
