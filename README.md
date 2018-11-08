@@ -1,3 +1,6 @@
+[![npm version](https://badge.fury.io/js/docker-container-proxy.svg)](https://badge.fury.io/js/docker-container-proxy)
+[![Build Status](https://travis-ci.org/DanielHabenicht/dockerproxy.svg?branch=master)](https://travis-ci.org/DanielHabenicht/dockerproxy)
+
 # Dockerproxy
 
 A little command line tool based on [ncarlier/redsocks](https://github.com/ncarlier/dockerfiles/tree/master/redsocks) to proxy all running docker containers, without the need to configure anything inside of them.
