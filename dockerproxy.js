@@ -102,7 +102,18 @@ commander
   .option('-n, --network <name>', 'docker network interface that should be proxied')
   .option('-w, --whitelistFile <path>', 'proxy server address')
   .option('--containerName <string>', 'proxy server Container Name')
+  .on('command:*', function () {
+    console.error(`Invalid command: ${commander.args.join(' ')}\nSee --help for a list of available commands.`);
+    process.exit(1);
+  })
   .parse(process.argv);
+
+
+
+// Handle no arguments
+if (commander.args.length === 0) {
+  commander.help();
+}
 
 function startProxy(address, port, name, network) {
   console.log(`Starting Proxy-Container, this might take a moment...`);
