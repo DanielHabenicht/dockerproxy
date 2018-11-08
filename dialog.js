@@ -1,7 +1,9 @@
 var inquirer = require('inquirer');
+const defaults = require('./defaults')
+
 
 const dialog = {
-  overwrite: function() {
+  overwrite: function () {
     return new Promise((resolve, reject) => {
       inquirer
         .prompt([
@@ -17,7 +19,7 @@ const dialog = {
         });
     });
   },
-  askForConfig: function(previousConfig) {
+  askForConfig: function (previousConfig) {
     if (!previousConfig) {
       // No previous Configuration
       return new Promise((resolve, reject) => {
@@ -27,7 +29,7 @@ const dialog = {
               type: 'input',
               name: 'proxyAddress',
               message: `What is the proxy address you want to use?`,
-              validate: function(input) {
+              validate: function (input) {
                 var done = this.async();
                 if (input == null || input === '') {
                   done('This Field cannot be blank.');
@@ -47,8 +49,8 @@ const dialog = {
               type: 'input',
               name: 'proxyPort',
               message: `Which port is the proxy server listening on?`,
-              default: '8080',
-              validate: function(input) {
+              default: defaults.proxyPort,
+              validate: function (input) {
                 var done = this.async();
                 if (input == null || input === '') {
                   done('This Field cannot be blank.');
@@ -72,7 +74,7 @@ const dialog = {
               type: 'input',
               name: 'containerName',
               message: `Should the container use a special name?`,
-              default: 'docker_proxy'
+              default: defaults.containerName
             }
           ])
           .then(answers => {
@@ -89,7 +91,7 @@ const dialog = {
               name: 'proxyAddress',
               message: `What is the proxy address you want to use?`,
               default: previousConfig.proxyAddress,
-              validate: function(input) {
+              validate: function (input) {
                 var done = this.async();
                 if (input == null || input === '') {
                   done('This Field cannot be blank.');
@@ -110,7 +112,7 @@ const dialog = {
               name: 'proxyPort',
               message: `Which port is the proxy server listening on?`,
               default: previousConfig.proxyPort,
-              validate: function(input) {
+              validate: function (input) {
                 var done = this.async();
                 if (input == null || input === '') {
                   done('This Field cannot be blank.');

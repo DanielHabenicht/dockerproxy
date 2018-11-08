@@ -18,26 +18,65 @@ npm i -g docker-container-proxy
 ```
 Usage: dockerproxy [options] <command>
 
+Proxy any Docker-Container
+
 Options:
-  -v, --version               output the version number
-  -a, --address [domain]      proxy server address
-  -p, --port [number]         proxy server port
-  -n, --network <name>        docker network interface that should be proxied
-  -w, --whitelistFile <path>  proxy server address
-  --containerName <string>    proxy server Container Name
-  -h, --help                  output usage information
+  -v, --version  output the version number
+  -h, --help     output usage information
 
 Commands:
-  start                       start proxying Docker-Containers
-  stop                        stop proxying Docker-Containers
-  setup                       setup this command tool in order to use it without options
-  reset                       reset the iptables Config, if the container was not stopped properly
-  config                      Print the config
+  up|u           start proxying Docker-Containers
+  down|d         stop proxying Docker-Containers
+  config|c       Print the config
+  setup|s        setup this command tool in order to use it without options
+  help [cmd]     display help for [cmd]
 
 Examples:
-  $ dockerproxy start   # Turn on the Docker Proxy
-  $ dockerproxy stop    # Turn off the Docker Proxy
+  $ dockerproxy up      # start the Docker Proxy
+  $ dockerproxy down    # stop the Docker Proxy
 ```
+### Up
+```
+Usage: dockerproxy up [options]
+
+Options:
+  -a, --address [domain]      proxy server address
+  -p, --port [number]         proxy server port (default: "8080")
+  -n, --network <name>        docker network interface that should be proxied
+  -w, --whitelistFile <path>  proxy server address
+  --containerName <string>    proxy server Container Name (default: "docker_proxy")
+  -h, --help                  output usage information
+```
+
+### Down
+```
+Usage: dockerproxy down [options]
+
+Options:
+  --containerName <string>  proxy server Container Name (default: "docker_proxy")
+  -h, --help                output usage information
+```
+
+### Setup
+```
+Usage: dockerproxy setup [options]
+
+Setup this command line tool in order to use it without options
+
+Options:
+  -h, --help  output usage information
+```
+
+### Config
+```
+Usage: dockerproxy config [options]
+
+Display the config
+
+Options:
+  -h, --help  output usage information
+```
+
 
 ## Example
 
@@ -45,7 +84,7 @@ There are two ways of using this command line tool:
 
 1. Recommended:
    - Configure the cli interactively for easier use later on (just type `dockerproxy setup`)
-   - Use either `dockerproxy start` or `dockerproxy stop` for turning the proxy on and off.
+   - Use either `dockerproxy up` or `dockerproxy down` for starting or stopping the proxy.
 2. For starting right away or usage in scripts:
    ```bash
    dockerproxy start --address company-proxy-address.com --port 8080
