@@ -1,11 +1,6 @@
 #! /usr/bin/env node
-var cmd = require('node-cmd');
 var commander = require('commander');
-const configFile = require('./configFile');
-const dialog = require('./dialog');
 const common = require('./common')
-
-console.log();
 
 // Basic Setup
 commander
