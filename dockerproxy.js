@@ -3,7 +3,7 @@ var cmd = require('node-cmd');
 var commander = require('commander');
 const configFile = require('./configFile');
 const dialog = require('./dialog');
-const chalk = require('chalk');
+const common = require('./common')
 
 console.log();
 
@@ -25,7 +25,7 @@ commander
   .description('start proxying Docker-Containers')
   .action(function () {
     if (!configFile.isConfigured() && !commander.address && !commander.port) {
-      error(
+      common.error(
         `ERROR: No configuration given.\nEither provide proxy address via --proxy option or setup this command via:\n    $ dockerproxy setup`
       );
       process.exit(1);
@@ -48,7 +48,7 @@ commander
   .description('stop proxying Docker-Containers')
   .action(function () {
     // if (!helpers.isConfigured() && !commander.address && !commander.port) {
-    //   error(
+    //   common.error(
     //     `ERROR: No configuration given.\nEither provide a container name via --containerName option or setup this command via:\n    $ dockerproxy setup`
     //   );
 
@@ -103,7 +103,7 @@ commander
   .option('-w, --whitelistFile <path>', 'proxy server address')
   .option('--containerName <string>', 'proxy server Container Name')
   .on('command:*', function () {
-    console.error(`Invalid command: ${commander.args.join(' ')}\nSee --help for a list of available commands.`);
+    console.common.error(`Invalid command: ${commander.args.join(' ')}\nSee --help for a list of available commands.`);
     process.exit(1);
   })
   .parse(process.argv);
@@ -126,10 +126,10 @@ function startProxy(address, port, name, network) {
   console.log(command);
   cmd.get(command, function (err, data, stderr) {
     if (err) {
-      error(`Proxy could not be started:\n ${stderr}`);
+      common.error(`Proxy could not be started:\n ${stderr}`);
       process.exit(1);
     }
-    success(`Started Proxy for network "${network === '' ? 'ALL' : network}" to "${address}" with id: ${data}`);
+    common.success(`Started Proxy for network "${network === '' ? 'ALL' : network}" to "${address}" with id: ${data}`);
     process.exit(0);
   });
 }
@@ -137,18 +137,10 @@ function startProxy(address, port, name, network) {
 function stopProxy(name) {
   cmd.get(`docker container stop ${name}`, function (err, data, stderr) {
     if (err) {
-      error(`Proxy could not be stopped:\n ${stderr}`);
+      common.error(`Proxy could not be stopped:\n ${stderr}`);
       process.exit(1);
     }
-    success(`Proxy stopped.`);
+    common.success(`Proxy stopped.`);
     process.exit(0);
   });
-}
-
-function error(str) {
-  console.error(chalk.red(str));
-}
-
-function success(str) {
-  console.log(chalk.green(str));
 }
