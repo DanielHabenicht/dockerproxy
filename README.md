@@ -91,6 +91,9 @@ There are two ways of using this command line tool:
    ```
    > You can use `--network` to specify a docker interface that should get proxied. (by default all networks get proxied)
 
-## Debugging
+## Development and Debugging
 
-Launch command with `node --inspect-brk dockerproxy.js setup` and follow this [guide](https://stackoverflow.com/a/47558970/9277073)
+1. Launch command with `node --inspect-brk dockerproxy.js setup`.
+   1. Follow this [guide](https://stackoverflow.com/a/47558970/9277073).
+   2. Launch `Attach to Remote` Debug Task in VSCode.
+
