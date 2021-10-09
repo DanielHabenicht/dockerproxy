@@ -28,7 +28,7 @@ const dialog = {
             {
               type: 'input',
               name: 'proxyAddress',
-              message: `What is the proxy address you want to use?`,
+              message: `What is the proxy domain you want to use? (e.g. proxy.domain.de)`,
               validate: function (input) {
                 var done = this.async();
                 if (input == null || input === '') {
