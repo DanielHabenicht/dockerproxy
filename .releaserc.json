@@ -1,0 +1,51 @@
+{
+  "branches": ["master"],
+  "verifyConditions": ["@semantic-release/changelog", "@semantic-release/github"],
+  "verifyConfig": ["@semantic-release/github"],
+  "prepare": [
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "node ./scripts/getChangelog.js ${lastRelease.version}"
+    },
+    {
+      "path": "@semantic-release/changelog",
+      "changelogFile": "changelog.md"
+    }
+  ],
+  "publish": [
+    {
+      "path": "@semantic-release/github",
+      "assets": [
+        {
+          "path": "changelog.md",
+          "label": "Changelog"
+        }
+      ]
+    },
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "echo \"::set-output name=RELEASED::true\""
+    },
+    {
+      "path": "@semantic-release/exec",
+      "cmd": "echo \"::set-output name=VERSION::${nextRelease.version}\""
+    }
+  ],
+  "fail": ["@semantic-release/github"],
+  "success": ["@semantic-release/github"],
+  "plugins": [
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "angular",
+        "releaseRules": [
+          {
+            "type": "trans",
+            "release": "patch"
+          }
+        ]
+      }
+    ],
+    "@semantic-release/release-notes-generator"
+  ]
+}
