@@ -1,3 +1,5 @@
-.travis.yml
 settings.json
-test
+scripts
+.github
+.vscode
+.releaserc.json
