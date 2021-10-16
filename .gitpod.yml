@@ -9,3 +9,7 @@ tasks:
   # Test
   - command: cd test && bats test.bats
 
+
+ports:
+  - port: 9299
+    onOpen: ignore
