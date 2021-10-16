@@ -4,7 +4,7 @@
 setup() {
   # setup docker
   # start a container
-  # so we can more easily try to access the proxied containers. 
+  # so we can more easily try to access the proxied containers.
 
     load 'test_helper/bats-support/load'
     load 'test_helper/bats-assert/load'
