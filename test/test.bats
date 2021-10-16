@@ -18,29 +18,38 @@ setup() {
     PATH="$DIR/../src:$PATH"
 }
 
-@test "Is executable" {
-  dockerproxy
-}
-
-
 @test "Show Help" {
-   run dockerproxy
+  run dockerproxy help
+  [ "$status" -eq 0 ]
   assert_output "Usage: dockerproxy [options] <command>
 
-Proxy any Docker-Container
+dockerproxy v0.0.0
+>Proxy any Docker-Container
 
 Options:
-  -v, --version  output the version number
-  -h, --help     output usage information
+  -v, --version   output the version number
+  -h, --help      display help for command
 
 Commands:
-  up|u           start proxying Docker-Containers
-  down|d         stop proxying Docker-Containers
-  config|c       Print the config
-  setup|s        setup this command tool in order to use it without options
-  help [cmd]     display help for [cmd]
+  up|u            start proxying Docker-Containers
+  down|d          stop proxying Docker-Containers
+  config|c        Print the config
+  setup|s         setup this command tool in order to use it without options
+  help [command]  display help for command
 
 Examples:
   $ dockerproxy up      # start the Docker Proxy
   $ dockerproxy down    # stop the Docker Proxy"
+}
+
+@test "Show Version Option 1" {
+  run dockerproxy -v
+  [ "$status" -eq 0 ]
+  assert_output "0.0.0"
+}
+
+@test "Show Version Option 2" {
+  run dockerproxy --version
+  [ "$status" -eq 0 ]
+  assert_output "0.0.0"
 }

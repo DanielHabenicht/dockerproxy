@@ -4,9 +4,9 @@ const common = require("./common");
 
 // Basic Setup
 commander
-  .name("dockerproxy")
-  .version(require("./package.json").version, "-v, --version")
-  .description("Proxy any Docker-Container")
+  .name('dockerproxy')
+  .version(require('./package.json').version, '-v, --version')
+  .description(`dockerproxy v${require('./package.json').version}\n>Proxy any Docker-Container`)
   .usage(`[options] <command>`)
   .on("--help", function () {
     console.log("");
