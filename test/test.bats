@@ -53,3 +53,9 @@ Examples:
   [ "$status" -eq 0 ]
   assert_output "0.0.0"
 }
+
+# @test 'Config' {
+#   run dockerproxy setup <<< 'proxy.domain.de\n'
+#   [[ "$status" == 0 ]]
+#   #[[ "$output" == '' ]]
+# }
