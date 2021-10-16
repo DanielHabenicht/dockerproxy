@@ -29,9 +29,5 @@ commander
 if (commander.args.length === 0) {
   commander.help();
 }
-if (!commander._execs[commander.args[0]]) {
-  common.error(`Invalid command: ${commander.args.join(' ')}\nSee --help for a list of available commands.`);
-  process.exit(1);
-}
 
 
