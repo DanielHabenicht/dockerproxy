@@ -1,0 +1,5 @@
+enabled: true
+restylers:
+  - clang-format:
+      enabled: false
+  - "*"
