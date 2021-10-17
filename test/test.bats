@@ -57,7 +57,9 @@ Examples:
 }
 
 @test 'Config' {
-  bash -c "rm $CONFIG_PATH || true"
+  if test -f "$CONFIG_PATH"; then
+    rm $CONFIG_PATH
+  fi
   eval "run ./test/setup.exp"
   assert_success
   echo "status = ${status}"
