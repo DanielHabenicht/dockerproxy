@@ -59,22 +59,22 @@ Examples:
 @test 'Config' {
   rm $CONFIG_PATH || true
   eval "run ./test/setup.exp"
+  assert_success
   echo "status = ${status}"
   echo "output = ${output}"
   result_file="$(cat $CONFIG_PATH)"
   echo "result_file = ${result_file}"
   [[ "$result_file" == '{"proxyAddress":"test.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
-  assert_success
 }
 
 @test 'Config - Overwrite' {
   eval "run ./test/setup-overwrite.exp"
+  assert_success
   echo "status = ${status}"
   echo "output = ${output}"
   result_file="$(cat $CONFIG_PATH)"
   echo "result_file = ${result_file}"
   [[ "$result_file" == '{"proxyAddress":"other.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
-  assert_success
 }
 
 @test 'Up' {
