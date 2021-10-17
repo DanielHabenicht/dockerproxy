@@ -46,7 +46,7 @@ function startProxy(address, port, name, network) {
         command = `docker run --rm --name ${name} --privileged=true --net=host -e DOCKER_NET=${network} -d ncarlier/redsocks ${address} ${port}`;
     }
     console.log(command);
-    cmd.get(command, function (err, data, stderr) {
+    cmd.run(command, function (err, data, stderr) {
         if (err) {
             common.error(`Proxy could not be started:\n ${stderr}`);
             process.exit(1);

@@ -22,7 +22,7 @@ setup() {
 
 @test "Show Help" {
   run dockerproxy help
-  [ "$status" -eq 0 ]
+  assert_success
   assert_output "Usage: dockerproxy [options] <command>
 
 dockerproxy v0.0.0
@@ -46,13 +46,13 @@ Examples:
 
 @test "Show Version Option 1" {
   run dockerproxy -v
-  [ "$status" -eq 0 ]
+  assert_success
   assert_output "0.0.0"
 }
 
 @test "Show Version Option 2" {
   run dockerproxy --version
-  [ "$status" -eq 0 ]
+  assert_success
   assert_output "0.0.0"
 }
 
@@ -64,7 +64,7 @@ Examples:
   result_file="$(cat $CONFIG_PATH)"
   echo "result_file = ${result_file}"
   [[ "$result_file" == '{"proxyAddress":"test.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
-  [[ "$status" == 0 ]]
+  assert_success
 }
 
 @test 'Config - Overwrite' {
@@ -74,6 +74,37 @@ Examples:
   result_file="$(cat $CONFIG_PATH)"
   echo "result_file = ${result_file}"
   [[ "$result_file" == '{"proxyAddress":"other.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
-  [[ "$status" == 0 ]]
-
+  assert_success
 }
+
+@test 'Up' {
+  run dockerproxy up
+  assert_success
+  assert_line "Starting Proxy-Container, this might take a moment..."
+  assert_line "docker run --rm --name docker_proxy --privileged=true --net=host -e DOCKER_NET -d ncarlier/redsocks other.domain.de 8080"
+  assert_line --partial 'Started Proxy for network "ALL" to "other.domain.de" with id:'
+}
+
+# @test 'Up - Already' {
+#   # TODO: Add Detection if container is already up
+#   run dockerproxy up
+#   assert_success
+#   assert_output "Proxy is already running"
+# }
+
+# TODO: Add docker exec command to check if the proxy really applies
+
+
+@test 'Down' {
+  run dockerproxy down
+  assert_success
+  assert_output "Proxy stopped."
+}
+
+# TODO: If the container is already down it should be a success
+# @test 'Down - Already' {
+#   run dockerproxy down
+#   assert_failure
+#   assert_output "Proxy could not be stopped:
+# Error response from daemon: No such container: docker_proxy"
+# }
