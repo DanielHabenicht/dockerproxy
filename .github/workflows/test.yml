@@ -22,5 +22,7 @@ jobs:
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y expect
       - name: Test
         run: npm run test-ci
