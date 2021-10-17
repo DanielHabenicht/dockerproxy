@@ -18,12 +18,15 @@ jobs:
         id: npm-cache
         with:
           path: '**/node_modules'
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install -y expect
+      - name: Test
+        timeout-minutes: 5
+        run: ./test/setup.exp
       - name: Test
         timeout-minutes: 5
         run: npm run test-ci
