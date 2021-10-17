@@ -57,7 +57,7 @@ Examples:
 }
 
 @test 'Config' {
-  rm $CONFIG_PATH || 0
+  bash -c "rm $CONFIG_PATH || true"
   eval "run ./test/setup.exp"
   assert_success
   echo "status = ${status}"
