@@ -93,6 +93,8 @@ There are two ways of using this command line tool:
 
 ## Development and Debugging
 
+1. Clone the repository and including the submodules (`git submodule update --init --recursive
+`)
 1. Launch command with `node --inspect-brk dockerproxy.js setup`.
    1. Follow this [guide](https://stackoverflow.com/a/47558970/9277073).
    2. Launch `Attach to Remote` Debug Task in VSCode.
