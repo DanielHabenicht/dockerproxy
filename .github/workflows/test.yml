@@ -26,7 +26,7 @@ jobs:
         run: sudo apt-get update && sudo apt-get install -y expect
       - name: Test
         timeout-minutes: 5
-        run: ./test/setup.exp
+        run: npm link && ./test/setup.exp
       - name: Test
         timeout-minutes: 5
         run: npm run test-ci
