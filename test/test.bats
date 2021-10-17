@@ -1,6 +1,8 @@
 #!/usr/bin/env bats
 # Read the Docs: https://bats-core.readthedocs.io/en/stable/tutorial.html#your-first-test
 
+CONFIG_PATH=~/docker-container-proxy-settings.json
+
 setup() {
   # setup docker
   # start a container
@@ -55,7 +57,23 @@ Examples:
 }
 
 @test 'Config' {
-  eval "run ./script.exp"
+  rm $CONFIG_PATH
+  eval "run ./test/setup.exp"
+  echo "status = ${status}"
+  echo "output = ${output}"
+  result_file="$(cat $CONFIG_PATH)"
+  echo "result_file = ${result_file}"
+  [[ "$result_file" == '{"proxyAddress":"test.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
+  [[ "$status" == 0 ]]
+}
+
+@test 'Config - Overwrite' {
+  eval "run ./test/setup-overwrite.exp"
+  echo "status = ${status}"
+  echo "output = ${output}"
+  result_file="$(cat $CONFIG_PATH)"
+  echo "result_file = ${result_file}"
+  [[ "$result_file" == '{"proxyAddress":"other.domain.de","proxyPort":"8080","network":"","containerName":"docker_proxy"}' ]]
   [[ "$status" == 0 ]]
 
 }
