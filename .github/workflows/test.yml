@@ -5,6 +5,7 @@ on:
 jobs:
   test:
     runs-on: ubuntu-18.04
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -25,8 +26,6 @@ jobs:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install -y expect
       - name: Test
-        timeout-minutes: 5
         run: npm link && ./test/setup.exp
       - name: Test
-        timeout-minutes: 5
         run: npm run test-ci
