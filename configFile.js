@@ -1,6 +1,7 @@
 var fs = require('fs');
+var path = require('path')
 var commander = require('commander');
-const settingsPath = require('os').homedir() + '\\docker-container-proxy-settings.json';
+const settingsPath = path.join(require('os').homedir() , 'docker-container-proxy-settings.json');
 
 const configFile = {
   isConfigured: function () {
