@@ -97,3 +97,7 @@ There are two ways of using this command line tool:
    1. Follow this [guide](https://stackoverflow.com/a/47558970/9277073).
    2. Launch `Attach to Remote` Debug Task in VSCode.
 
+
+## Testing
+
+Install bats (`npm i -g bats`) and expect (`sudo apt-get install expect`). Simply run `npm run test` afterwards.

@@ -54,8 +54,8 @@ Examples:
   assert_output "0.0.0"
 }
 
-# @test 'Config' {
-#   run dockerproxy setup <<< 'proxy.domain.de\n'
-#   [[ "$status" == 0 ]]
-#   #[[ "$output" == '' ]]
-# }
+@test 'Config' {
+  eval "run ./script.exp"
+  [[ "$status" == 0 ]]
+
+}
