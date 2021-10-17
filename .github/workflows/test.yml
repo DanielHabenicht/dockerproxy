@@ -25,4 +25,5 @@ jobs:
       - name: Install packages
         run: sudo apt-get update && sudo apt-get install -y expect
       - name: Test
+        timeout-minutes: 5
         run: npm run test-ci
