@@ -12,7 +12,9 @@ commander
 
 // Throws Error if another argument is passed to the command
 if (commander.args.length !== 0) {
-  common.error(`This command does not accept any arguments.\nSee --help for a list of available options.`);
+  common.error(
+    `This command does not accept any arguments.\nSee --help for a list of available options.`
+  );
   process.exit(1);
 }
 

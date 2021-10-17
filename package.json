@@ -7,7 +7,8 @@
     "test-ci": "npm run pre-test && npm run test",
     "pre-test": "npm link ",
     "test": "bats --tap test",
-    "release": "semantic-release"
+    "release": "semantic-release",
+    "format": "npx prettier --write ./*"
   },
   "repository": "https://github.com/DanielHabenicht/dockerproxy",
   "keywords": [

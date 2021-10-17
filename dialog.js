@@ -1,6 +1,5 @@
 var inquirer = require('inquirer');
-const defaults = require('./defaults')
-
+const defaults = require('./defaults');
 
 const dialog = {
   overwrite: function () {
@@ -11,10 +10,10 @@ const dialog = {
             type: 'confirm',
             name: 'overwrite',
             message: 'A settings.json File already exists. Do you want to override?',
-            default: false
-          }
+            default: false,
+          },
         ])
-        .then(answers => {
+        .then((answers) => {
           resolve(answers.overwrite);
         });
     });
@@ -43,7 +42,7 @@ const dialog = {
                 }
                 // Pass the return value in the done callback
                 done(null, true);
-              }
+              },
             },
             {
               type: 'input',
@@ -62,22 +61,22 @@ const dialog = {
                 }
                 // Pass the return value in the done callback
                 done(null, true);
-              }
+              },
             },
             {
               type: 'input',
               name: 'network',
               message: `Which network should be proxied? (Leave blank to proxy all.)`,
-              default: ''
+              default: '',
             },
             {
               type: 'input',
               name: 'containerName',
               message: `Should the container use a special name?`,
-              default: defaults.containerName
-            }
+              default: defaults.containerName,
+            },
           ])
-          .then(answers => {
+          .then((answers) => {
             resolve(answersToConfigObject(answers));
           });
       });
@@ -105,7 +104,7 @@ const dialog = {
                 }
                 // Pass the return value in the done callback
                 done(null, true);
-              }
+              },
             },
             {
               type: 'input',
@@ -124,27 +123,27 @@ const dialog = {
                 }
                 // Pass the return value in the done callback
                 done(null, true);
-              }
+              },
             },
             {
               type: 'input',
               name: 'network',
               message: `Which network should be proxied? (Leave blank to proxy all.)`,
-              default: previousConfig.network
+              default: previousConfig.network,
             },
             {
               type: 'input',
               name: 'containerName',
               message: `Should the container use a special name?`,
-              default: previousConfig.containerName
-            }
+              default: previousConfig.containerName,
+            },
           ])
-          .then(answers => {
+          .then((answers) => {
             resolve(answersToConfigObject(answers));
           });
       });
     }
-  }
+  },
 };
 
 function answersToConfigObject(answers) {
@@ -152,7 +151,7 @@ function answersToConfigObject(answers) {
     proxyAddress: answers.proxyAddress,
     proxyPort: answers.proxyPort,
     network: answers.network,
-    containerName: answers.containerName
+    containerName: answers.containerName,
   };
 }
 
