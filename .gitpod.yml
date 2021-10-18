@@ -1,9 +1,8 @@
 # List the start up tasks. Learn more https://www.gitpod.io/docs/config-start-tasks/
 tasks:
   - init: | 
-      sudo add-apt-repository -y ppa:duggan/bats
       sudo apt-get update
-      sudo apt-get install -y bats
+      sudo apt-get install -y expect
       npm install 
     command: node --inspect-brk dockerproxy.js setup
   # Test

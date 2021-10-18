@@ -4,7 +4,8 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
+    timeout-minutes: 5
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -17,10 +18,14 @@ jobs:
       - uses: actions/cache@v2
         id: npm-cache
         with:
-          path: "**/node_modules"
-          key: ${{ runner.os }}-modules-${{ hashFiles('**/package-lock.json') }}
+          path: 'node_modules'
+          key: ${{ runner.os }}-modules-${{ hashFiles('package-lock.json') }}
       - name: Install dependencies
         if: steps.npm-cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: Install packages
+        run: sudo apt-get update && sudo apt-get install -y expect
+      - name: Test
+        run: npm link && ./test/setup.exp
       - name: Test
         run: npm run test-ci

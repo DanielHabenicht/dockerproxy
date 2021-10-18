@@ -5,9 +5,10 @@
   "main": "dockerproxy.js",
   "scripts": {
     "test-ci": "npm run pre-test && npm run test",
-    "pre-test": "npm link ",
-    "test": "bats --tap test",
-    "release": "semantic-release"
+    "pre-test": "npm link",
+    "test": "bats test",
+    "release": "semantic-release",
+    "format": "npx prettier --write ./*"
   },
   "repository": "https://github.com/DanielHabenicht/dockerproxy",
   "keywords": [
@@ -25,10 +26,10 @@
   },
   "homepage": "https://github.com/DanielHabenicht/dockerproxy#readme",
   "dependencies": {
-    "chalk": "^2.4.1",
-    "commander": "^2.19.0",
-    "inquirer": "^6.2.0",
-    "node-cmd": "^3.0.0"
+    "chalk": "4.1.2",
+    "commander": "8.2.0",
+    "inquirer": "8.2.0",
+    "node-cmd": "5.0.0"
   },
   "devDependencies": {
     "semantic-release": "^18.0.0",

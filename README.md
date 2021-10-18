@@ -35,7 +35,9 @@ Examples:
   $ dockerproxy up      # start the Docker Proxy
   $ dockerproxy down    # stop the Docker Proxy
 ```
+
 ### Up
+
 ```
 Usage: dockerproxy up [options]
 
@@ -49,6 +51,7 @@ Options:
 ```
 
 ### Down
+
 ```
 Usage: dockerproxy down [options]
 
@@ -58,6 +61,7 @@ Options:
 ```
 
 ### Setup
+
 ```
 Usage: dockerproxy setup [options]
 
@@ -68,6 +72,7 @@ Options:
 ```
 
 ### Config
+
 ```
 Usage: dockerproxy config [options]
 
@@ -76,7 +81,6 @@ Display the config
 Options:
   -h, --help  output usage information
 ```
-
 
 ## Example
 
@@ -93,7 +97,11 @@ There are two ways of using this command line tool:
 
 ## Development and Debugging
 
+1. Clone the repository and including the submodules (`git submodule update --init --recursive`)
 1. Launch command with `node --inspect-brk dockerproxy.js setup`.
    1. Follow this [guide](https://stackoverflow.com/a/47558970/9277073).
    2. Launch `Attach to Remote` Debug Task in VSCode.
 
+## Testing
+
+Install bats (`npm i -g bats`) and expect (`sudo apt-get install expect`). Simply run `npm run test` afterwards.

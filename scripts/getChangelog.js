@@ -13,7 +13,9 @@ let lastVersion = process.argv[2];
 
 if (lastVersion == null) {
   // This is the first release
-  console.warn('Last Version parameter was not set. This should only be the case for the first release.');
+  console.warn(
+    'Last Version parameter was not set. This should only be the case for the first release.'
+  );
   return;
 }
 let url = `${pjson.repository}/releases/download/v${lastVersion}/changelog.md`;

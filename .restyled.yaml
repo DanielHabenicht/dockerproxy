@@ -1,0 +1,7 @@
+enabled: true
+restylers:
+  - clang-format:
+      enabled: false
+  - prettier-markdown:
+      enabled: false
+  - "*"
