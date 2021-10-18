@@ -45,7 +45,6 @@ if {$force_conservative} {
 set timeout -1
 spawn dockerproxy setup
 match_max 100000
-expect "*What is the proxy domain you want to use? (e.g. proxy.domain.de)*"
 send -- "t"
 send -- "e"
 send -- "s"
@@ -61,14 +60,11 @@ send -- "."
 send -- "d"
 send -- "e"
 send -- "\r"
-expect "*What is the proxy domain you want to use? (e.g. proxy.domain.de)*test.domain.de*\r*Which port is the proxy server listening on?*"
 send -- "8"
 send -- "0"
 send -- "8"
 send -- "0"
 send -- "\r"
-expect "*Which port is the proxy server listening on?*\r*Which network should be proxied? (Leave blank to proxy all.)*"
 send -- "\r"
-expect "*Which network should be proxied? (Leave blank to proxy all.)*\r*Should the container use a special name?*(docker_proxy)*"
 send -- "\r"
 expect eof
