@@ -5,8 +5,8 @@
   "main": "dockerproxy.js",
   "scripts": {
     "test-ci": "npm run pre-test && npm run test",
-    "pre-test": "npm link ",
-    "test": "bats --tap test",
+    "pre-test": "npm link",
+    "test": "bats test",
     "release": "semantic-release",
     "format": "npx prettier --write ./*"
   },
