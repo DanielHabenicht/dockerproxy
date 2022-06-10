@@ -32,7 +32,7 @@
     "node-cmd": "5.0.0"
   },
   "devDependencies": {
-    "semantic-release": "^18.0.0",
+    "semantic-release": "^19.0.3",
     "@semantic-release/changelog": "^6.0.0",
     "@semantic-release/commit-analyzer": "^9.0.1",
     "@semantic-release/exec": "^6.0.1",
